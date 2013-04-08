@@ -1,0 +1,47 @@
+---
+abstract: 'University of NeuchÃ¢tel stemmers'
+author:
+  - 'Nick Patch <patch@cpan.org>'
+build_requires:
+  Pod::Man: 2.04
+  String::Dump: 0.05
+  Test::More: 0.82
+configure_requires:
+  Module::Build: 0.36
+dynamic_config: 1
+generated_by: 'Module::Build version 0.4003, CPAN::Meta::Converter version 2.120921'
+license: perl
+meta-spec:
+  url: http://module-build.sourceforge.net/META-spec-v1.4.html
+  version: 1.4
+name: Lingua-Stem-UniNE
+provides:
+  Lingua::Stem::UniNE:
+    file: lib/Lingua/Stem/UniNE.pm
+    version: 0.02
+  Lingua::Stem::UniNE::BG:
+    file: lib/Lingua/Stem/UniNE/BG.pm
+    version: 0.02
+  Lingua::Stem::UniNE::CS:
+    file: lib/Lingua/Stem/UniNE/CS.pm
+    version: 0.02
+  Lingua::Stem::UniNE::FA:
+    file: lib/Lingua/Stem/UniNE/FA.pm
+    version: 0.02
+requires:
+  Carp: 0
+  Moo: 1.000000
+  Unicode::CaseFold: 0
+  Unicode::Normalize: 0
+  charnames: 0
+  parent: 0
+  perl: v5.8.0
+  strict: 0
+  utf8: 0
+  warnings: 0
+resources:
+  bugtracker: https://github.com/patch/lingua-stem-unine-pm5/issues
+  homepage: https://github.com/patch/lingua-stem-unine-pm5
+  license: http://dev.perl.org/licenses/
+  repository: git://github.com/patch/lingua-stem-unine-pm5.git
+version: 0.02
