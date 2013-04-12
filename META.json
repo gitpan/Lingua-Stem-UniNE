@@ -1,10 +1,10 @@
 {
-   "abstract" : "University of NeuchÃ¢tel stemmers",
+   "abstract" : "University of Neuchâtel stemmers",
    "author" : [
       "Nick Patch <patch@cpan.org>"
    ],
    "dynamic_config" : 1,
-   "generated_by" : "Module::Build version 0.4003, CPAN::Meta::Converter version 2.120921",
+   "generated_by" : "Module::Build version 0.4004, CPAN::Meta::Converter version 2.130880",
    "license" : [
       "perl_5"
    ],
@@ -44,19 +44,19 @@
    "provides" : {
       "Lingua::Stem::UniNE" : {
          "file" : "lib/Lingua/Stem/UniNE.pm",
-         "version" : "0.02"
+         "version" : "0.03"
       },
       "Lingua::Stem::UniNE::BG" : {
          "file" : "lib/Lingua/Stem/UniNE/BG.pm",
-         "version" : "0.02"
+         "version" : "0.03"
       },
       "Lingua::Stem::UniNE::CS" : {
          "file" : "lib/Lingua/Stem/UniNE/CS.pm",
-         "version" : "0.02"
+         "version" : "0.03"
       },
       "Lingua::Stem::UniNE::FA" : {
          "file" : "lib/Lingua/Stem/UniNE/FA.pm",
-         "version" : "0.02"
+         "version" : "0.03"
       }
    },
    "release_status" : "stable",
@@ -72,5 +72,5 @@
          "url" : "git://github.com/patch/lingua-stem-unine-pm5.git"
       }
    },
-   "version" : "0.02"
+   "version" : "0.03"
 }
