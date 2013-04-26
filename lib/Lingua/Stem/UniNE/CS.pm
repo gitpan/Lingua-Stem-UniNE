@@ -5,10 +5,8 @@ use utf8;
 use strict;
 use warnings;
 use parent 'Exporter';
-use Unicode::CaseFold qw( fc );
-use Unicode::Normalize qw( NFC );
 
-our $VERSION   = '0.03';
+our $VERSION   = '0.04';
 our @EXPORT_OK = qw( stem stem_cs );
 
 *stem_cs = \&stem;
@@ -16,7 +14,6 @@ our @EXPORT_OK = qw( stem stem_cs );
 sub stem {
     my ($word) = @_;
 
-    $word = NFC fc $word;
     $word = remove_case($word);
     $word = remove_possessives($word);
 
@@ -30,12 +27,12 @@ sub remove_case {
 
     if ($length > 7) {
         return $word
-            if $word =~ s{ atech $}{}x;  # -atech
+            if $word =~ s{ atech $}{}x;
     }
 
     if ($length > 6) {
         return $word
-            if $word =~ s{ atům $}{}x;  # -atům
+            if $word =~ s{ atům $}{}x;
 
         return palatalize($word)
             if $word =~ s{ (?<= ě ) tem $}{}x;  # -ětem → -ě
@@ -81,16 +78,16 @@ sub remove_case {
 
     if ($length > 3) {
         return $word
-            if $word =~ s{ [aáéouůyý] $}{}x;  # -a -á -é -o -u -ů -y -ý
+            if $word =~ s{ [aáéouůyý] $}{}x;
 
         return palatalize($word)
-            if $word =~ m{ [eěií] $}x;  # -e -ě -i -í
+            if $word =~ m{ [eěií] $}x;
     }
 
     return $word;
 }
 
-# remove possesive endings from names -ov- and -in-
+# remove possesive endings from names
 sub remove_possessives {
     my ($word) = @_;
 
@@ -132,7 +129,7 @@ Lingua::Stem::UniNE::CS - Czech stemmer
 
 =head1 VERSION
 
-This document describes Lingua::Stem::UniNE::CS v0.03.
+This document describes Lingua::Stem::UniNE::CS v0.04.
 
 =head1 SYNOPSIS
 
@@ -157,7 +154,11 @@ stem.
 
 L<Lingua::Stem::UniNE> provides a stemming object with access to all of the
 implemented University of Neuchâtel stemmers including this one.  It has
-additional features like stemming lists or array references of words.
+additional features like stemming lists of words.
+
+L<Lingua::Stem::Any> provides a unified interface to any stemmer on CPAN,
+including this one, as well as additional features like normalization,
+casefolding, and in-place stemming.
 
 This stemming algorithm was defined in
 L<Indexing and stemming approaches for the Czech language|http://dl.acm.org/citation.cfm?id=1598600>

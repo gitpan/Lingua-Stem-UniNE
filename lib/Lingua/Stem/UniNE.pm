@@ -5,7 +5,7 @@ use utf8;
 use Moo;
 use Carp;
 
-our $VERSION = '0.03';
+our $VERSION = '0.04';
 
 my @languages = qw( bg cs fa );
 my %is_language = map { $_ => 1 } @languages;
@@ -38,6 +38,9 @@ sub languages {
 sub stem {
     my $self = shift;
 
+    # in-place stemming of arrayrefs is deprecated, has moved to the
+    # stem_in_place method of Lingua::Stem::Any, and will be removed in a future
+    # release
     if (@_ == 1 && ref $_[0] eq 'ARRAY') {
         for my $word ( @{$_[0]} ) {
             $word = $self->_stemmer->($word);
@@ -62,7 +65,7 @@ Lingua::Stem::UniNE - University of Neuchâtel stemmers
 
 =head1 VERSION
 
-This document describes Lingua::Stem::UniNE v0.03.
+This document describes Lingua::Stem::UniNE v0.04.
 
 =head1 SYNOPSIS
 
@@ -77,18 +80,16 @@ This document describes Lingua::Stem::UniNE v0.03.
     # get list of stems for list of words
     @stems = $stemmer->stem(@words);
 
-    # replace words in array reference with stems
-    $stemmer->stem(\@words);
-
 =head1 DESCRIPTION
 
 This module contains a collection of stemmers for multiple languages based on
-stemming algorithms provided by Jacques Savoy of the University of Neuchâtel.
-The languages currently implemented are L<Bulgarian|Lingua::Stem::UniNE::BG>,
-L<Czech|Lingua::Stem::UniNE::CS>, and L<Persian|Lingua::Stem::UniNE::FA>.  Work
-is ongoing for Arabic, Bengali, Finnish, French, German, Hindi, Hungarian,
-Italian, Portuguese, Marathi, Russian, Spanish, and Swedish.  The top priority
-is languages for which there are no stemmers available on CPAN.
+stemming algorithms provided by Jacques Savoy of the University of Neuchâtel
+(UniNE).  The languages currently implemented are
+L<Bulgarian|Lingua::Stem::UniNE::BG>, L<Czech|Lingua::Stem::UniNE::CS>, and
+L<Persian|Lingua::Stem::UniNE::FA>.  Work is ongoing for Arabic, Bengali,
+Finnish, French, German, Hindi, Hungarian, Italian, Portuguese, Marathi,
+Russian, Spanish, and Swedish.  The top priority is languages for which there
+are no stemmers available on CPAN.
 
 =head2 Attributes
 
@@ -117,7 +118,7 @@ always returned in lowercase when requested.
     $stemmer->language($language);
 
 Country codes such as C<cz> for the Czech Republic are not supported, nor are
-IETF language tags such as C<pt-PT> or C<pt-BR>.
+IETF language tags such as C<fa-AF> or C<fa-IR>.
 
 =back
 
@@ -127,23 +128,19 @@ IETF language tags such as C<pt-PT> or C<pt-BR>.
 
 =item stem
 
-When a list of strings is provided, each string is stemmed and a list of stems
-is returned.  The list returned will always have the same number of elements in
-the same order as the list provided.
+Accepts a list of words, stems each word, and returns a list of stems.  The list
+returned will always have the same number of elements in the same order as the
+list provided.  When no stemming rules apply to a word, the original word is
+returned.
 
     @stems = $stemmer->stem(@words);
 
     # get the stem for a single word
     $stem = $stemmer->stem($word);
 
-When an array reference is provided, each element is stemmed and replaced with
-the resulting stem.
-
-    $stemmer->stem(\@words);
-
 The words should be provided as character strings and the stems are returned as
-character strings.  Byte strings in arbitrary character encodings are not
-supported.
+character strings.  Byte strings in arbitrary character encodings are
+intentionally not supported.
 
 =item languages
 
@@ -155,14 +152,16 @@ Returns a list of supported two-letter language codes using lowercase letters.
     # class method
     @languages = Lingua::Stem::UniNE->languages;
 
-In scalar context it returns the number of supported languages.
-
 =back
 
 =head1 SEE ALSO
 
 L<IR Multilingual Resources at UniNE|http://members.unine.ch/jacques.savoy/clef/>
 provides the original stemming algorithms that were implemented in this module.
+
+L<Lingua::Stem::Any> provides a unified interface to any stemmer on CPAN,
+including this module, as well as additional features like normalization,
+casefolding, and in-place stemming.
 
 L<Lingua::Stem::Snowball> provides alternate stemming algorithms for Finnish,
 French, German, Hungarian, Italian, Portuguese, Russian, Spanish, and Swedish,
