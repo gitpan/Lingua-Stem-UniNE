@@ -1,13 +1,15 @@
 package Lingua::Stem::UniNE::FA;
 
-use v5.8;
+use v5.8.1;
 use utf8;
 use strict;
 use warnings;
 use charnames ':full';
 use parent 'Exporter';
+use Unicode::CaseFold qw( fc );
+use Unicode::Normalize qw( NFC );
 
-our $VERSION   = '0.04';
+our $VERSION   = '0.05';
 our @EXPORT_OK = qw( stem stem_fa );
 
 *stem_fa = \&stem;
@@ -15,6 +17,7 @@ our @EXPORT_OK = qw( stem stem_fa );
 sub stem {
     my ($word) = @_;
 
+    $word = NFC fc $word;
     $word = remove_kasra($word);
     $word = remove_suffix($word);
     $word = remove_kasra($word);
@@ -98,7 +101,7 @@ Lingua::Stem::UniNE::FA - Persian stemmer
 
 =head1 VERSION
 
-This document describes Lingua::Stem::UniNE::FA v0.04.
+This document describes Lingua::Stem::UniNE::FA v0.05.
 
 =head1 SYNOPSIS
 
@@ -114,26 +117,22 @@ This document describes Lingua::Stem::UniNE::FA v0.04.
 A stemmer for the Persian (Farsi) language.
 
 This module provides the C<stem> and C<stem_fa> functions, which are synonymous
-and can optionally be exported.  They accept a single word and return a single
+and can optionally be exported. They accept a single word and return a single
 stem.
 
 =head1 SEE ALSO
 
 L<Lingua::Stem::UniNE> provides a stemming object with access to all of the
-implemented University of Neuchâtel stemmers including this one.  It has
+implemented University of Neuchâtel stemmers including this one. It has
 additional features like stemming lists of words.
 
 L<Lingua::Stem::Any> provides a unified interface to any stemmer on CPAN,
 including this one, as well as additional features like normalization,
 casefolding, and in-place stemming.
 
-This stemming algorithm was originally implemented by Ljiljana Dolamic in
+This module is based on a stemming algorithm by Ljiljana Dolamic and Jacques
+Savoy of the University of Neuchâtel and implemented in
 L<Java|http://members.unine.ch/jacques.savoy/clef/persianStemmerUnicode.txt>.
-
-=head1 ACKNOWLEDGEMENTS
-
-Ljiljana Dolamic and Jacques Savoy of the University of Neuchâtel authored the
-original stemming algorithm that was implemented in this module.
 
 =head1 AUTHOR
 
@@ -141,7 +140,7 @@ Nick Patch <patch@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-© 2012–2013 Nick Patch
+© 2012–2014 Nick Patch
 
 This library is free software; you can redistribute it and/or modify it under
 the same terms as Perl itself.

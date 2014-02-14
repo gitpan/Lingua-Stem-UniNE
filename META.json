@@ -4,7 +4,7 @@
       "Nick Patch <patch@cpan.org>"
    ],
    "dynamic_config" : 1,
-   "generated_by" : "Module::Build version 0.4003, CPAN::Meta::Converter version 2.120921",
+   "generated_by" : "Module::Build version 0.4205",
    "license" : [
       "perl_5"
    ],
@@ -16,23 +16,29 @@
    "prereqs" : {
       "build" : {
          "requires" : {
+            "English" : "0",
             "Pod::Man" : "2.04",
             "String::Dump" : "0.05",
-            "Test::More" : "0.82"
+            "Test::More" : "0.82",
+            "open" : "0"
          }
       },
       "configure" : {
          "requires" : {
-            "Module::Build" : "0.36"
+            "Module::Build" : "0.3622"
          }
       },
       "runtime" : {
          "requires" : {
             "Carp" : "0",
-            "Moo" : "1.000000",
+            "Exporter" : "0",
+            "Moo" : "1.001000",
+            "Unicode::CaseFold" : "0",
+            "Unicode::Normalize" : "0",
             "charnames" : "0",
+            "namespace::clean" : "0",
             "parent" : "0",
-            "perl" : "v5.8.0",
+            "perl" : "v5.8.1",
             "strict" : "0",
             "utf8" : "0",
             "warnings" : "0"
@@ -42,19 +48,23 @@
    "provides" : {
       "Lingua::Stem::UniNE" : {
          "file" : "lib/Lingua/Stem/UniNE.pm",
-         "version" : "0.04"
+         "version" : "0.05"
       },
       "Lingua::Stem::UniNE::BG" : {
          "file" : "lib/Lingua/Stem/UniNE/BG.pm",
-         "version" : "0.04"
+         "version" : "0.05"
       },
       "Lingua::Stem::UniNE::CS" : {
          "file" : "lib/Lingua/Stem/UniNE/CS.pm",
-         "version" : "0.04"
+         "version" : "0.05"
+      },
+      "Lingua::Stem::UniNE::DE" : {
+         "file" : "lib/Lingua/Stem/UniNE/DE.pm",
+         "version" : "0.05"
       },
       "Lingua::Stem::UniNE::FA" : {
          "file" : "lib/Lingua/Stem/UniNE/FA.pm",
-         "version" : "0.04"
+         "version" : "0.05"
       }
    },
    "release_status" : "stable",
@@ -70,5 +80,5 @@
          "url" : "git://github.com/patch/lingua-stem-unine-pm5.git"
       }
    },
-   "version" : "0.04"
+   "version" : "0.05"
 }

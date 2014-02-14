@@ -1,18 +1,22 @@
 package Lingua::Stem::UniNE::BG;
 
-use v5.8;
+use v5.8.1;
 use utf8;
 use strict;
 use warnings;
 use parent 'Exporter';
+use Unicode::CaseFold qw( fc );
+use Unicode::Normalize qw( NFC );
 
-our $VERSION   = '0.04';
+our $VERSION   = '0.05';
 our @EXPORT_OK = qw( stem stem_bg );
 
 *stem_bg = \&stem;
 
 sub stem {
     my ($word) = @_;
+
+    $word = NFC fc $word;
 
     my $length = length $word;
 
@@ -120,7 +124,7 @@ Lingua::Stem::UniNE::BG - Bulgarian stemmer
 
 =head1 VERSION
 
-This document describes Lingua::Stem::UniNE::BG v0.04.
+This document describes Lingua::Stem::UniNE::BG v0.05.
 
 =head1 SYNOPSIS
 
@@ -136,28 +140,23 @@ This document describes Lingua::Stem::UniNE::BG v0.04.
 A stemmer for the Bulgarian language.
 
 This module provides the C<stem> and C<stem_bg> functions, which are synonymous
-and can optionally be exported.  They accept a single word and return a single
+and can optionally be exported. They accept a single word and return a single
 stem.
 
 =head1 SEE ALSO
 
 L<Lingua::Stem::UniNE> provides a stemming object with access to all of the
-implemented University of Neuchâtel stemmers including this one.  It has
+implemented University of Neuchâtel stemmers including this one. It has
 additional features like stemming lists of words.
 
 L<Lingua::Stem::Any> provides a unified interface to any stemmer on CPAN,
 including this one, as well as additional features like normalization,
 casefolding, and in-place stemming.
 
-This stemming algorithm was defined in
+This module is based on a stemming algorithm defined in
 L<Searching Strategies for the Bulgarian Language|http://dl.acm.org/citation.cfm?id=1298736>
-(PDF) by Jacques Savoy and originally implemented by him as a
+(PDF) by Jacques Savoy of the University of Neuchâtel and implemented in a
 L<Perl script|http://members.unine.ch/jacques.savoy/clef/bulgarianStemmer.txt>.
-
-=head1 ACKNOWLEDGEMENTS
-
-Jacques Savoy of the University of Neuchâtel authored the original stemming
-algorithm that was implemented in this module.
 
 =head1 AUTHOR
 
@@ -165,7 +164,7 @@ Nick Patch <patch@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-© 2012–2013 Nick Patch
+© 2012–2014 Nick Patch
 
 This library is free software; you can redistribute it and/or modify it under
 the same terms as Perl itself.

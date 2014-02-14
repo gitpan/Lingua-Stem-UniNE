@@ -2,7 +2,7 @@ NAME
     Lingua::Stem::UniNE - University of Neuchâtel stemmers
 
 VERSION
-    This document describes Lingua::Stem::UniNE v0.04.
+    This document describes Lingua::Stem::UniNE v0.05.
 
 SYNOPSIS
         use Lingua::Stem::UniNE;
@@ -20,10 +20,10 @@ DESCRIPTION
     This module contains a collection of stemmers for multiple languages
     based on stemming algorithms provided by Jacques Savoy of the University
     of Neuchâtel (UniNE). The languages currently implemented are Bulgarian,
-    Czech, and Persian. Work is ongoing for Arabic, Bengali, Finnish,
-    French, German, Hindi, Hungarian, Italian, Portuguese, Marathi, Russian,
-    Spanish, and Swedish. The top priority is languages for which there are
-    no stemmers available on CPAN.
+    Czech, German, and Persian. Work is ongoing for Arabic, Bengali,
+    Finnish, French, Hindi, Hungarian, Italian, Portuguese, Marathi,
+    Russian, Spanish, and Swedish. The top priority is languages for which
+    there are no stemmers available on CPAN.
 
   Attributes
     language
@@ -32,6 +32,7 @@ DESCRIPTION
             ┌───────────┬────┐
             │ Bulgarian │ bg │
             │ Czech     │ cs │
+            │ German    │ de │
             │ Persian   │ fa │
             └───────────┴────┘
 
@@ -49,6 +50,15 @@ DESCRIPTION
 
         Country codes such as "cz" for the Czech Republic are not supported,
         nor are IETF language tags such as "fa-AF" or "fa-IR".
+
+    aggressive
+        By default, if there are multiple strengths of stemmers, a light
+        stemmer will be used. When "aggressive" is set to true, an
+        aggressive stemmer will be used if available.
+
+            $stemmer->aggressive(1);
+
+        Czech and German have aggressive options.
 
   Methods
     stem
@@ -77,10 +87,6 @@ DESCRIPTION
             @languages = Lingua::Stem::UniNE->languages;
 
 SEE ALSO
-    IR Multilingual Resources at UniNE
-    <http://members.unine.ch/jacques.savoy/clef/> provides the original
-    stemming algorithms that were implemented in this module.
-
     Lingua::Stem::Any provides a unified interface to any stemmer on CPAN,
     including this module, as well as additional features like
     normalization, casefolding, and in-place stemming.
@@ -89,22 +95,21 @@ SEE ALSO
     Finnish, French, German, Hungarian, Italian, Portuguese, Russian,
     Spanish, and Swedish, as well as other languages.
 
-ACKNOWLEDGEMENTS
-    Jacques Savoy <http://members.unine.ch/jacques.savoy/> and Ljiljana
-    Dolamic of the University of Neuchâtel authored the original stemming
-    algorithms that were implemented in this module.
-
-    This module is brought to you by Shutterstock
-    <http://www.shutterstock.com/> (@ShutterTech
-    <https://twitter.com/ShutterTech>). Additional open source projects from
-    Shutterstock can be found at code.shutterstock.com
-    <http://code.shutterstock.com/>.
+    These stemming algorithms are based on definition and implementations by
+    Jacques Savoy and Ljiljana Dolamic of the University of Neuchâtel and
+    provided at IR Multilingual Resources at UniNE
+    <http://members.unine.ch/jacques.savoy/clef/>.
 
 AUTHOR
     Nick Patch <patch@cpan.org>
 
+    This project is brought to you by Shutterstock
+    <http://www.shutterstock.com/>. Additional open source projects from
+    Shutterstock can be found at code.shutterstock.com
+    <http://code.shutterstock.com/>.
+
 COPYRIGHT AND LICENSE
-    © 2012–2013 Nick Patch
+    © 2012–2014 Shutterstock, Inc.
 
     This library is free software; you can redistribute it and/or modify it
     under the same terms as Perl itself.

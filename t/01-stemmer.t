@@ -2,7 +2,7 @@ use utf8;
 use strict;
 use warnings;
 use open qw( :encoding(UTF-8) :std );
-use Test::More tests => 27;
+use Test::More tests => 30;
 use Lingua::Stem::UniNE;
 
 my (@words, @words_copy);
@@ -13,7 +13,7 @@ can_ok $stemmer, qw( stem language languages );
 
 is $stemmer->language, 'cs', 'language read-accessor';
 
-my @langs = qw( bg cs fa );
+my @langs = qw( bg cs de fa );
 my $langs = @langs;
 is_deeply [$stemmer->languages],            \@langs, 'object method list';
 is_deeply [Lingua::Stem::UniNE->languages], \@langs, 'class method list';
@@ -26,9 +26,6 @@ is scalar Lingua::Stem::UniNE::languages,    $langs, 'function scalar';
 is_deeply [$stemmer->stem(@words)], [qw( že dobř jesk )], 'list of words';
 is_deeply \@words, \@words_copy, 'not destructive on arrays';
 
-$stemmer->stem(\@words);
-is_deeply \@words, [qw( že dobř jesk )], 'arrayref modified in place';
-
 is_deeply scalar $stemmer->stem(@words), 'jesk', 'list of words in scalar';
 
 is_deeply [$stemmer->stem('prosím')], ['pro'], 'word in list context';
@@ -37,6 +34,13 @@ is scalar $stemmer->stem('prosím'),   'pro',   'word in scalar context';
 is scalar $stemmer->stem(),           undef,   'empty list in scalar context';
 
 is $stemmer->stem('работа'), 'работа', 'only stem for current language';
+
+$stemmer->language('cs');
+ok !$stemmer->aggressive,               'light stemmer by default';
+is $stemmer->stem('všechno'), 'všechn', 'light stemmer';
+$stemmer->aggressive(1);
+ok $stemmer->aggressive,                'aggressive stemmer explicitly set';
+is $stemmer->stem('všechno'), 'všech',  'aggressive stemmer';
 
 $stemmer->language('bg');
 is $stemmer->language,       'bg',  'language changed via write-accessor';
