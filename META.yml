@@ -20,19 +20,19 @@ name: Lingua-Stem-UniNE
 provides:
   Lingua::Stem::UniNE:
     file: lib/Lingua/Stem/UniNE.pm
-    version: 0.05
+    version: 0.06
   Lingua::Stem::UniNE::BG:
     file: lib/Lingua/Stem/UniNE/BG.pm
-    version: 0.05
+    version: 0.06
   Lingua::Stem::UniNE::CS:
     file: lib/Lingua/Stem/UniNE/CS.pm
-    version: 0.05
+    version: 0.06
   Lingua::Stem::UniNE::DE:
     file: lib/Lingua/Stem/UniNE/DE.pm
-    version: 0.05
+    version: 0.06
   Lingua::Stem::UniNE::FA:
     file: lib/Lingua/Stem/UniNE/FA.pm
-    version: 0.05
+    version: 0.06
 requires:
   Carp: 0
   Exporter: 0
@@ -51,4 +51,4 @@ resources:
   homepage: https://github.com/patch/lingua-stem-unine-pm5
   license: http://dev.perl.org/licenses/
   repository: git://github.com/patch/lingua-stem-unine-pm5.git
-version: 0.05
+version: 0.06

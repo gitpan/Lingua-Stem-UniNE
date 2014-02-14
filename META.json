@@ -48,23 +48,23 @@
    "provides" : {
       "Lingua::Stem::UniNE" : {
          "file" : "lib/Lingua/Stem/UniNE.pm",
-         "version" : "0.05"
+         "version" : "0.06"
       },
       "Lingua::Stem::UniNE::BG" : {
          "file" : "lib/Lingua/Stem/UniNE/BG.pm",
-         "version" : "0.05"
+         "version" : "0.06"
       },
       "Lingua::Stem::UniNE::CS" : {
          "file" : "lib/Lingua/Stem/UniNE/CS.pm",
-         "version" : "0.05"
+         "version" : "0.06"
       },
       "Lingua::Stem::UniNE::DE" : {
          "file" : "lib/Lingua/Stem/UniNE/DE.pm",
-         "version" : "0.05"
+         "version" : "0.06"
       },
       "Lingua::Stem::UniNE::FA" : {
          "file" : "lib/Lingua/Stem/UniNE/FA.pm",
-         "version" : "0.05"
+         "version" : "0.06"
       }
    },
    "release_status" : "stable",
@@ -80,5 +80,5 @@
          "url" : "git://github.com/patch/lingua-stem-unine-pm5.git"
       }
    },
-   "version" : "0.05"
+   "version" : "0.06"
 }

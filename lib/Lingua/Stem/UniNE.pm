@@ -7,7 +7,7 @@ use Carp;
 use Moo;
 use namespace::clean;
 
-our $VERSION = '0.05';
+our $VERSION = '0.06';
 
 my @languages  = qw( bg cs de fa );
 my @aggressive = qw( cs de );
@@ -48,7 +48,7 @@ sub _build_stemmer {
     }
 
     require "Lingua/Stem/UniNE/$language.pm";
-    $self->_stemmer( \&{"Lingua::Stem::UniNE::$language::$function"} );
+    $self->_stemmer( \&{"Lingua::Stem::UniNE::${language}::${function}"} );
 }
 
 sub languages {
@@ -74,7 +74,7 @@ Lingua::Stem::UniNE - University of Neuchâtel stemmers
 
 =head1 VERSION
 
-This document describes Lingua::Stem::UniNE v0.05.
+This document describes Lingua::Stem::UniNE v0.06.
 
 =head1 SYNOPSIS
 
