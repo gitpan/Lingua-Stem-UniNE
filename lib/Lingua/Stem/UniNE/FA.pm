@@ -4,12 +4,17 @@ use v5.8.1;
 use utf8;
 use strict;
 use warnings;
-use charnames ':full';
 use parent 'Exporter';
 use Unicode::CaseFold qw( fc );
 use Unicode::Normalize qw( NFC );
 
-our $VERSION   = '0.07';
+BEGIN { # Perl v5.16.0 workaround for RT#113750
+    local $_;
+    require charnames;
+    charnames->import(':full');
+}
+
+our $VERSION   = '0.08';
 our @EXPORT_OK = qw( stem stem_fa );
 
 *stem_fa = \&stem;
@@ -101,7 +106,7 @@ Lingua::Stem::UniNE::FA - Persian stemmer
 
 =head1 VERSION
 
-This document describes Lingua::Stem::UniNE::FA v0.07.
+This document describes Lingua::Stem::UniNE::FA v0.08.
 
 =head1 SYNOPSIS
 
